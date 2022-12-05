@@ -1,4 +1,4 @@
-export function traducirDato(data, id, productSantaIsabelPrice) {
+export function traducirDato(data, id) {
     let product = {}
     let referenceId = data.products[id].items[0].referenceId[0].Value
     let productName = data.products[id].productName
@@ -20,11 +20,15 @@ export function traducirDato(data, id, productSantaIsabelPrice) {
     product['name'] = productName
     product['image'] = productImage
     product['Jumbo'] = productJumboPrice
-    product['SantaIsabel'] = productSantaIsabelPrice
     //product['caracteristicas'] = caracteristicas
     product['productCondicionAlimentaria'] = productCondicionAlimentaria
     product['productIngredients'] = productIngredients
     product['isVegan'] = isVegan
     product['cantidad'] = 1
    return product
+}
+
+export function setSantaIsabelPrice(item, productSantaIsabelPrice) {
+ item['SantaIsabel'] = productSantaIsabelPrice
+ return item
 }
