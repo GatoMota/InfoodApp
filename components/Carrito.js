@@ -80,7 +80,7 @@ export function Jumbo({ route, navigation }) {
       <ScrollView >
         {products}
       </ScrollView>
-      <Button title={"Total $"+totales.totalJumbo.toString()} onPress={getCache}/>
+      {totales != undefined ? <Button title={"Total $"+ totales.totalJumbo.toString()} onPress={getCache}/> : <Button title={"Total $"}></Button>}
       <Button title="Eliminar Lista" onPress={deleteData}/>
       <StatusBar style="auto" /> 
     </View>
@@ -163,7 +163,7 @@ let products = productList.map(item => {
           <Text style={styles.container}>{productList.totalSantaIsabel}</Text>
         </View>
       </ScrollView>
-      <Button title={"Total $"+totales.totalJumbo.toString()} onPress={getCache}/>
+      {Object.keys(totales).length > 0? <Button title={"Total $"+ totales.totalSantaIsabel.toString()} onPress={getCache}/> : <Button title={"Total $"}></Button>}
       <Button title="Eliminar Lista" onPress={deleteData}/>
       <StatusBar style="auto" /> 
     </View>

@@ -7,11 +7,9 @@ import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import Dialog from 'react-native-dialog';
 import { getFunctions } from 'firebase/functions'
 import { Platform } from 'react-native';
-import UserAgent, { getWebViewUserAgent } from 'react-native-user-agent';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as Linking from 'expo-linking';
-import GetWebView from './WebView';
 import {Search} from './Search'
 import MarketTabs from './MarketsTabs';
 import { traducirDato } from './DataTranslator';
@@ -118,8 +116,18 @@ export default function App({ navigation }) {
   if (!permission.granted) {
     // Camera permissions are not granted yet
     return (
-      <View style={styles.container}>
-        <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
+      <View >
+         <Text style={styles.text}></Text>
+         <Text style={styles.text}></Text>
+         <Text style={styles.text}></Text>
+         <Text style={styles.text}></Text>
+         <Text style={styles.text}></Text>
+         <Text style={styles.text}></Text>
+         <Text style={styles.text}></Text>
+         <Text style={styles.text}></Text>
+         <Text style={styles.text}></Text>
+        <Text style={styles.text}></Text>
+        <Text style={styles.permission}>We need your permission to show the camera</Text>
         <Button onPress={requestPermission} title="grant permission" style={styles.button} />
       </View>
     );
@@ -310,6 +318,7 @@ const config = {
               //alerta += `${feature}: ${responseJson.responses[0].textAnnotations[0].description}`
               if(onReady) {
               setOnReady(false)
+              setCameraRef(null)
               searchOCR(responseJson.responses[0].textAnnotations[0].description)
               }
             } else if(feature === 'fullTextAnnotation') {
@@ -352,14 +361,14 @@ const config = {
         </View>
         <Button onPress={async() => {
             setOnReady(true)
-            setCameraRef(null)
+            //setCameraRef(null)
             //console.log(db.app.name)
             //let responseJson = await photoToVision()
             //console.log(Object.values(responseJson.responses[0].error))
             //console.log(responseJson.responses[0])
             //getCities()
           }} title="Recargar Cámara"/>
-                <View>
+        <View>
       <Button title="Buscar manualmente" onPress={showDialog} />
       <Dialog.Container visible={visible}>
         <Dialog.Title>Buscar producto</Dialog.Title>
@@ -401,4 +410,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
   },
+  permission: {
+    textAlign: 'center',
+    fontSize: 20
+  },
+
 });

@@ -29,7 +29,6 @@ let product = (
         : <Text />}
         <Text key={item.productIngredients} style={styles.ingredients}>{item.productIngredients}</Text>
         <Text key={item.productCondicionAlimentaria} style={styles.condicionAlimentaria}>{item.productCondicionAlimentaria}</Text>
-        <Button title="Eliminar Lista" onPress={deleteData}/>
       </View>
     </Card>
 )
