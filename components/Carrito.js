@@ -11,6 +11,7 @@ import { traducirDatos } from './DataTranslator';
 export function Jumbo({ route, navigation }) {
   const [productList, setProductList] = useState([])
   const [totales, setTotales] = useState({})
+  const [isReady, setReady] = useState(false)
   const getCache = async () => {
     let cache = await getData()
     if(cache != null){
@@ -53,6 +54,7 @@ export function Jumbo({ route, navigation }) {
       totalez['totalJumbo'] = totalJumbo
       totalez['totalSantaIsabel'] = totalSantaIsabel
       setTotales(totalez)
+      setReady(true)
     }
 
   const products = productList.map(item => {
@@ -80,7 +82,7 @@ export function Jumbo({ route, navigation }) {
       <ScrollView >
         {products}
       </ScrollView>
-      {totales != undefined ? <Button title={"Total $"+ totales.totalJumbo.toString()} onPress={getCache}/> : <Button title={"Total $"}></Button>}
+      {isReady ? <Button title={"Total $"+ totales.totalJumbo.toString()} onPress={getCache}/> : <Button title={"Cargando $"} onPress={getCache}></Button>}
       <Button title="Eliminar Lista" onPress={deleteData}/>
       <StatusBar style="auto" /> 
     </View>
@@ -90,6 +92,7 @@ export function Jumbo({ route, navigation }) {
 export function SantaIsabel({ route, navigation }) {
   const [productList, setProductList] = useState([])
   const [totales, setTotales] = useState({})
+  const [isReady, setReady] = useState(false)
   const getCache = async () => {
     let cache = await getData()
     if(cache != null){
@@ -134,6 +137,7 @@ export function SantaIsabel({ route, navigation }) {
       totalez['totalJumbo'] = totalJumbo
       totalez['totalSantaIsabel'] = totalSantaIsabel
       setTotales(totalez)
+      setReady(true)
     }
 let products = productList.map(item => {
         
@@ -163,7 +167,7 @@ let products = productList.map(item => {
           <Text style={styles.container}>{productList.totalSantaIsabel}</Text>
         </View>
       </ScrollView>
-      {Object.keys(totales).length > 0? <Button title={"Total $"+ totales.totalSantaIsabel.toString()} onPress={getCache}/> : <Button title={"Total $"}></Button>}
+      {isReady ? <Button title={"Total $"+ totales.totalJumbo.toString()} onPress={getCache}/> : <Button title={"Cargando $"} onPress={getCache}></Button>}
       <Button title="Eliminar Lista" onPress={deleteData}/>
       <StatusBar style="auto" /> 
     </View>
